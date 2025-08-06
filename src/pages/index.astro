@@ -10,56 +10,30 @@ const latestPosts = sortedPosts.slice(0, 3); // Show latest 3 posts
 
 <Layout title="Dens Sumesh – Founding Engineer & AI Engineer">
   <!-- HERO -->
-  <section class="mb-2 p-4 border border-zinc-700 rounded">
-    <div class="flex justify-between items-start">
+  <section class=" px-2 rounded">
+    <div >
       <div>
-        <h1 class="text-base font-normal mb-1">Hey, I'm Dens 👋</h1>
-        <p>AI & Backend Engineer</p>
-      </div>
-      <!-- CONTACT BUTTONS -->
-      <div class="flex gap-2 text-xs">
-        <a 
-          href="mailto:dens.sumesh79@gmail.com" 
-          class="px-2 py-1 bg-zinc-800 border border-zinc-600 rounded hover:border-zinc-500 transition-colors"
-          title="Email"
-        >
-          Email
-        </a>
-        <a 
-          href="https://github.com/densumesh" 
-          class="px-2 py-1 bg-zinc-800 border border-zinc-600 rounded hover:border-zinc-500 transition-colors"
-          title="GitHub"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          GitHub ↗
-        </a>
-        <a 
-          href="https://x.com/densumesh" 
-          class="px-2 py-1 bg-zinc-800 border border-zinc-600 rounded hover:border-zinc-500 transition-colors"
-          title="X (Twitter)"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          X ↗
-        </a>
+        <h1 class="text-lg font-normal">Hey, I'm Dens 👋</h1>
       </div>
     </div>
   </section>
 
+  <hr class="border-zinc-700 my-4 sm:hidden">
+
   <!-- ABOUT -->
-  <section class="mb-2 p-4 border border-zinc-700 rounded">
-    <h2 class="text-base font-normal mb-1">About</h2>
+  <section class="mb-2 p-2 rounded">
     <p class="text-sm mb-2">
-      As the first engineering hire at
-      <a href="https://www.trieve.ai" class="text-blue-400 hover:underline">Trieve (YC W23)</a>,
-      I designed and scaled a distributed search platform that handles millions of queries in under&nbsp;100 ms.
+      I was employee #1 at
+      <a href="https://www.trieve.ai" class="text-blue-400 hover:underline">Trieve (YC W24)</a>,
+      where I designed and scaled a distributed search platform that handles millions of queries in under&nbsp;100 ms.
+    </p>
+    <p class="text-sm mb-2">
       Before that, I contributed to deep-space satellite-communication research in ASU’s
       <a href="https://interplanetary.asu.edu/" class="text-blue-400 hover:underline">Interplanetary Initiative Lab</a>.
     </p>
 
     <p class="text-sm mb-2">
-      I’m currently a Jr. SDE at Amazon, building large-scale backend services for vending brands and IP asset management while completing my B.S. in Computer Science at Arizona State University.
+      Currently, I'm a Jr. SDE at Amazon, building large-scale backend services for vending brands and IP asset management while completing my B.S. in Computer Science at Arizona State University.
     </p>
 
     <p class="text-sm">
@@ -67,8 +41,10 @@ const latestPosts = sortedPosts.slice(0, 3); // Show latest 3 posts
     </p>
   </section>
 
+  <hr class="border-zinc-700 my-4 sm:hidden">
+
   <!-- PROJECTS -->
-  <section class="mb-2 p-4 border border-zinc-700 rounded">
+  <section class="mb-2 p-2 rounded">
     <h2 class="text-base font-normal mb-1">Featured Work</h2>
     <ul class="list-disc list-inside space-y-0 text-sm">
             <li>
@@ -93,8 +69,10 @@ const latestPosts = sortedPosts.slice(0, 3); // Show latest 3 posts
     </ul>
   </section>
 
+  <hr class="border-zinc-700 my-4">
+
   <!-- BLOG -->
-  <section class="mb-1 p-4 border border-zinc-700 rounded">
+  <section class="mb-1 p-2 rounded">
     <h2 class="text-base font-normal mb-2">Latest Blog Posts</h2>
     <ul class="space-y-2 text-sm">
       {latestPosts.map((post) => (

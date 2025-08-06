@@ -7,18 +7,18 @@ const sortedPosts = posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDa
 ---
 
 <Layout title="Blog - Dens Sumesh">
-  <section class="mb-6 p-4 border border-zinc-700 rounded">
+  <section class="mb-6 p-4 rounded">
     <h1 class="text-xl font-normal mb-2">Blog</h1>
     <p>Thoughts on engineering, AI, and building distributed systems.</p>
   </section>
 
-  <section class="mb-6 p-4 border border-zinc-700 rounded">
+  <section class="mb-6 p-4 rounded">
     {sortedPosts.length === 0 ? (
       <p>No blog posts yet. Check back soon!</p>
     ) : (
       <ul class="space-y-1">
         {sortedPosts.map((post) => (
-          <li class="p-2">
+          <li class="">
             <h3 class="text-lg font-normal">
               <a href={`/blog/${post.slug}`} class="text-blue-400 hover:underline">{post.data.title}</a>
             </h3>

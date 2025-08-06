@@ -16,10 +16,10 @@ const sortedPosts = posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDa
     {sortedPosts.length === 0 ? (
       <p>No blog posts yet. Check back soon!</p>
     ) : (
-      <ul class="space-y-4">
+      <ul class="space-y-1">
         {sortedPosts.map((post) => (
-          <li class="p-4 border border-zinc-700 rounded">
-            <h3 class="text-lg font-normal mb-2">
+          <li class="p-2">
+            <h3 class="text-lg font-normal">
               <a href={`/blog/${post.slug}`} class="text-blue-400 hover:underline">{post.data.title}</a>
             </h3>
             <div class="text-zinc-500 text-sm mb-2">
@@ -37,22 +37,5 @@ const sortedPosts = posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDa
         ))}
       </ul>
     )}
-  </section>
-
-  <!-- External Blog Posts -->
-  <section class="section">
-    <h2>External Posts</h2>
-    <ul>
-      <li>
-        <a href="https://trieve.ai/accurate-hallucination-detection-with-ner" class="external-link">
-          Accurate Hallucination Detection with NER
-        </a>
-      </li>
-      <li>
-        <a href="https://trieve.ai/building-blazingly-fast-typo-correction-in-rust" class="external-link">
-          Building Blazingly Fast Typo Correction in Rust
-        </a>
-      </li>
-    </ul>
   </section>
 </Layout>

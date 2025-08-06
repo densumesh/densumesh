@@ -1,43 +1,16 @@
-# Astro Starter Kit: Minimal
+# Hey, I'm Dens 👋
 
-```sh
-npm create astro@latest -- --template minimal
-```
+I'm a software engineer passionate about building high-performance systems and AI applications. I am currently working as a Jr. Software Development Engineer at **Amazon**, where I build large-scale backend services for vending brands and IP asset management.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+As the **first engineering hire** at [Trieve (YC W23)](https://www.trieve.ai), I designed and scaled a distributed search platform that handles millions of queries in under 100 ms. Before that, I contributed to deep-space satellite-communication research in ASU's [Interplanetary Initiative Lab](https://interplanetary.asu.edu/).
 
-## 🚀 Project Structure
+## Featured Projects
 
-Inside of your Astro project, you'll see the following folders and files:
+- **[Trieve](https://github.com/devflowinc/trieve)** — Low latency search engine for AI applications
+- **[Broccoli](https://github.com/densumesh/broccoli)** — Distributed Rust message-queue with Redis backing
+- **[Actix Req/Reply Cache](https://github.com/densumesh/actix-request-reply-cache)** — Request/reply cache for Actix-web backed by Redis
+- **[Debate Evidence](https://github.com/densumesh/debatev-frontend)** — Debate evidence search platform (30K+ users)
 
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
+---
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
-
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
-
-Any static assets, like images, can be placed in the `public/` directory.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+**Contact**: [dens.sumesh79@gmail.com](mailto:dens.sumesh79@gmail.com) | **Website**: [densumesh.dev](https://densumesh.dev) | **X**: [@densumesh](https://x.com/densumesh)

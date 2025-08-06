@@ -1,106 +1,115 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+// Get blog posts and sort by date
+const posts = await getCollection('blog');
+const sortedPosts = posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+const latestPosts = sortedPosts.slice(0, 3); // Show latest 3 posts
 ---
 
 <Layout title="Dens Sumesh – Founding Engineer & AI Engineer">
   <!-- HERO -->
-  <section class="mb-1 p-2 border border-zinc-700 rounded">
-    <h1 class="text-base font-normal mb-1">Hey, I'm Dens 👋</h1>
-    <p class="mb-1">AI & Backend Engineer • Rust | TypeScript | Python</p>
-    <h2 class="text-sm font-normal mb-1 mt-1">Contact</h2>
-    <p class="text-xs">
-      dens.sumesh79@gmail.com • 480.938.0990 •
-      <a href="https://github.com/densumesh" class="text-blue-400 hover:underline">github.com/densumesh</a>
-    </p>
-  </section>
-
-  <!-- ABOUT -->
-  <section class="mb-1 p-2 border border-zinc-700 rounded">
-    <h2 class="text-sm font-normal mb-1">About</h2>
-    <p class="text-xs">
-      I'm a Founding Engineer at Trieve (YC W23) building distributed systems
-      and search infra. Previously at the Interplanetary Initiative Lab, I
-      worked on satellite communication systems. I am currently pursuing a
-      B.S. in Computer Science at ASU.
-    </p>
-  </section>
-
-  <!-- RÉSUMÉ -->
-  <section class="mb-1 p-2 border border-zinc-700 rounded">
-    <h2 class="text-sm font-normal mb-1">Résumé</h2>
-
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
-      <!-- Column 1 -->
+  <section class="mb-2 p-4 border border-zinc-700 rounded">
+    <div class="flex justify-between items-start">
       <div>
-        <h3 class="text-sm font-normal mb-1 mt-2">Education</h3>
-        <p class="mb-2 text-sm">
-          <strong>B.S. Computer Science</strong><br />
-          Arizona State University<br />
-          GPA: 4.0
-        </p>
-
-        <h3 class="text-sm font-normal mb-1 mt-2">Technical Skills</h3>
-        <ul class="list-disc list-inside space-y-0 mb-2 text-sm">
-          <li>Rust, Kotlin, TypeScript, Python, Java, SQL, C, C++</li>
-          <li>
-            AWS (Lambda, API Gateway, DynamoDB, CDK), Kubernetes, Redis,
-            RabbitMQ
-          </li>
-          <li>
-            React, Remix, Actix, Flask, Jest, Cypress, Docker, OAuth2, Dagger
-          </li>
-          <li>Postgres, MongoDB, Elasticsearch, Qdrant</li>
-        </ul>
+        <h1 class="text-base font-normal mb-1">Hey, I'm Dens 👋</h1>
+        <p>AI & Backend Engineer</p>
       </div>
-
-      <!-- Column 2 -->
-      <div>
-        <h3 class="text-sm font-normal mb-1 mt-2">Work Experience</h3>
-        <h4 class="font-normal mb-1 text-sm">Trieve (YC W23) — Founding Engineer / AI Engineer</h4>
-        <p class="italic mb-1 text-xs"><em>Jun 2023–Present | San Francisco, CA</em></p>
-        <ul class="list-disc list-inside space-y-0 mb-2 text-sm">
-          <li>
-            300 µs typo‑tolerance system via BK‑Trees + Redis (100× faster).
-          </li>
-          <li>
-            Scaled ClickHouse analytics with event batching and optimized
-            schemas & queries.
-          </li>
-          <li>100+ TPS Rust & Redis workers on Kubernetes.</li>
-          <li>
-            Real‑time hallucination detection (67% accuracy) on RAGTruth.
-          </li>
-        </ul>
-
-        <h4 class="font-normal mb-1 text-sm">Interplanetary Initiative Lab — Laboratory Aide</h4>
-        <p class="italic mb-1 text-xs"><em>Jan 2024–Oct 2024 | Tempe, AZ</em></p>
-        <ul class="list-disc list-inside space-y-0 text-sm">
-          <li>Satellite radio protocols & ADCS commissioning software.</li>
-          <li>Telemetry pipelines & solar‑panel alignment algorithms.</li>
-        </ul>
+      <!-- CONTACT BUTTONS -->
+      <div class="flex gap-2 text-xs">
+        <a 
+          href="mailto:dens.sumesh79@gmail.com" 
+          class="px-2 py-1 bg-zinc-800 border border-zinc-600 rounded hover:border-zinc-500 transition-colors"
+          title="Email"
+        >
+          Email
+        </a>
+        <a 
+          href="https://github.com/densumesh" 
+          class="px-2 py-1 bg-zinc-800 border border-zinc-600 rounded hover:border-zinc-500 transition-colors"
+          title="GitHub"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          GitHub ↗
+        </a>
+        <a 
+          href="https://x.com/densumesh" 
+          class="px-2 py-1 bg-zinc-800 border border-zinc-600 rounded hover:border-zinc-500 transition-colors"
+          title="X (Twitter)"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          X ↗
+        </a>
       </div>
     </div>
   </section>
 
+  <!-- ABOUT -->
+  <section class="mb-2 p-4 border border-zinc-700 rounded">
+    <h2 class="text-base font-normal mb-1">About</h2>
+    <p class="text-sm mb-2">
+      As the first engineering hire at
+      <a href="https://www.trieve.ai" class="text-blue-400 hover:underline">Trieve (YC W23)</a>,
+      I designed and scaled a distributed search platform that handles millions of queries in under&nbsp;100 ms.
+      Before that, I contributed to deep-space satellite-communication research in ASU’s
+      <a href="https://interplanetary.asu.edu/" class="text-blue-400 hover:underline">Interplanetary Initiative Lab</a>.
+    </p>
+
+    <p class="text-sm mb-2">
+      I’m currently a Jr. Software Development Engineer at Amazon, building large-scale backend services for vending brands and IP asset management while completing my B.S. in Computer Science at Arizona State University.
+    </p>
+
+    <p class="text-sm">
+      When I’m not coding, you’ll find me logging flight hours toward my private pilot’s license or tinkering with my many unfinished electrical engineering projects.
+    </p>
+  </section>
+
   <!-- PROJECTS -->
-  <section class="mb-1 p-2 border border-zinc-700 rounded">
-    <h2 class="text-sm font-normal mb-1">Projects</h2>
-    <ul class="list-disc list-inside space-y-0 text-xs">
+  <section class="mb-2 p-4 border border-zinc-700 rounded">
+    <h2 class="text-base font-normal mb-1">Featured Work</h2>
+    <ul class="list-disc list-inside space-y-0 text-sm">
+            <li>
+        <strong>Trieve</strong> — Low latency search engine for AI applications.
+        <a href="https://github.com/devflowinc/trieve" class="text-blue-400 hover:underline">Repo↗</a>
+      </li>
       <li>
         <strong>Broccoli</strong> — Distributed Rust message‑queue with Redis
         backing.
-        <a href="https://github.com/densumesh/broccoli" class="text-blue-400 hover:underline">Repo</a>
+        <a href="https://github.com/densumesh/broccoli" class="text-blue-400 hover:underline">Repo↗</a>
       </li>
       <li>
         <strong>Actix Req/Reply Cache</strong> — A simple request/reply cache
         for Actix‑web backed by Redis.
-        <a href="https://github.com/densumesh/actix-request-reply-cache" class="text-blue-400 hover:underline">Repo</a>
+        <a href="https://github.com/densumesh/actix-request-reply-cache" class="text-blue-400 hover:underline">Repo↗</a>
       </li>
       <li>
         <strong>Debate Evidence</strong> — Debate evidence search platform (30
         K+ users).
-        <a href="https://github.com/densumesh/debatev-frontend" class="text-blue-400 hover:underline">Repo</a>
+        <a href="https://github.com/densumesh/debatev-frontend" class="text-blue-400 hover:underline">Repo↗</a>
       </li>
     </ul>
+  </section>
+
+  <!-- BLOG -->
+  <section class="mb-1 p-4 border border-zinc-700 rounded">
+    <h2 class="text-base font-normal mb-2">Latest Blog Posts</h2>
+    <ul class="space-y-2 text-sm">
+      {latestPosts.map((post) => (
+        <li>
+          <a href={`/blog/${post.slug}`} class="text-blue-400 hover:underline">
+            <strong>{post.data.title}</strong>
+          </a>
+          <span class="text-zinc-400 text-xs block">{post.data.description}</span>
+        </li>
+      ))}
+    </ul>
+    <div class="mt-3">
+      <a href="/blog" class="text-blue-400 hover:underline text-sm">
+        View all posts →
+      </a>
+    </div>
   </section>
 </Layout>

@@ -1,0 +1,213 @@
+---
+export interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content={description || "Dens Sumesh is a Founding Engineer & AI Engineer building distributed systems, search infrastructure, and ML‑powered engines."} />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!-- FAVICONS -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon.png" />
+    
+    <!-- THEME & MOBILE -->
+    <meta name="theme-color" content="#2E3440" />
+    
+    <!-- Open Graph (social previews) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description || "Founding Engineer & AI Engineer building distributed systems, search infrastructure, and ML‑powered engines."} />
+    <meta property="og:url" content="https://densumesh.dev" />
+    <meta property="og:image" content="https://densumesh.dev/og-image.png" />
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description || "Founding Engineer & AI Engineer building distributed systems, search infrastructure, and ML‑powered engines."} />
+    <meta name="twitter:image" content="https://densumesh.dev/og-image.png" />
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-40Q5MFLQZH"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-40Q5MFLQZH');
+    </script>
+    
+    <title>{title}</title>
+    
+    <style is:global>
+      :root {
+        /* Minimalistic 3-color palette */
+        --color-bg: #1a1a1a;
+        --color-text: #e8e8e8;
+        --color-accent: #6aa4f8;
+        --color-muted: #888888;
+        
+        /* Spacing using character units */
+        --space-xs: 0.5ch;
+        --space-sm: 1ch;
+        --space-md: 2ch;
+        --space-lg: 3ch;
+        --space-xl: 4ch;
+      }
+      
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      
+      html {
+        font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
+        background: var(--color-bg);
+        color: var(--color-text);
+        line-height: 1.6;
+      }
+      
+      body {
+        margin: var(--space-md);
+        max-width: 120ch;
+        margin-left: auto;
+        margin-right: auto;
+        padding: var(--space-md);
+      }
+      
+      /* Typography */
+      h1, h2, h3, h4, h5, h6 {
+        margin-bottom: var(--space-sm);
+        font-weight: normal;
+      }
+      
+      h1 {
+        font-size: 1.5rem;
+        margin-bottom: var(--space-md);
+      }
+      
+      h2 {
+        font-size: 1.25rem;
+        margin-top: var(--space-lg);
+        margin-bottom: var(--space-sm);
+      }
+      
+      h3 {
+        font-size: 1.1rem;
+        margin-top: var(--space-md);
+      }
+      
+      p {
+        margin-bottom: var(--space-sm);
+      }
+      
+      /* Links */
+      a {
+        color: var(--color-accent);
+        text-decoration: none;
+      }
+      
+      a:hover {
+        text-decoration: underline;
+      }
+      
+      /* Lists */
+      ul, ol {
+        margin-left: var(--space-md);
+        margin-bottom: var(--space-sm);
+      }
+      
+      li {
+        margin-bottom: var(--space-xs);
+      }
+      
+      /* Main layout */
+      .section {
+        margin-bottom: var(--space-xl);
+        padding: var(--space-lg);
+        border: 1px solid #333;
+        border-radius: 4px;
+      }
+      
+      .grid-two {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--space-md);
+      }
+      
+      /* Navigation */
+      nav {
+        margin-bottom: var(--space-xl);
+        text-align: center;
+      }
+      
+      nav a {
+        margin: 0 var(--space-md);
+        color: var(--color-muted);
+      }
+      
+      nav a:hover, nav a.active {
+        color: var(--color-accent);
+      }
+      
+      /* External link indicator */
+      .external-link::after {
+        content: " ↗";
+        color: var(--color-muted);
+      }
+      
+      /* Blog specific */
+      .blog-meta {
+        color: var(--color-muted);
+        font-size: 0.9rem;
+        margin-bottom: var(--space-sm);
+      }
+      
+      .blog-list {
+        list-style: none;
+        margin-left: 0;
+      }
+      
+      .blog-list li {
+        margin-bottom: var(--space-md);
+        padding-bottom: var(--space-sm);
+        border-bottom: 1px solid #333;
+      }
+      
+      /* Responsive */
+      @media (max-width: 768px) {
+        .grid-two {
+          grid-template-columns: 1fr;
+        }
+        
+        body {
+          margin: var(--space-sm);
+          padding: var(--space-sm);
+        }
+        
+        nav a {
+          margin: 0 var(--space-sm);
+        }
+      }
+    </style>
+  </head>
+  
+  <body>
+    <nav>
+      <a href="/">home</a>
+      <a href="/blog">blog</a>
+      <a href="https://github.com/densumesh" class="external-link">github</a>
+    </nav>
+    
+    <main>
+      <slot />
+    </main>
+  </body>
+</html>

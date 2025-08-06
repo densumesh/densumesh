@@ -4,20 +4,20 @@ import Layout from '../layouts/Layout.astro';
 
 <Layout title="Dens Sumesh – Founding Engineer & AI Engineer">
   <!-- HERO -->
-  <section class="section">
-    <h1>Hey, I'm Dens 👋</h1>
-    <p>AI & Backend Engineer • Rust | TypeScript | Python</p>
-    <h2>Contact</h2>
-    <p>
+  <section class="mb-1 p-2 border border-zinc-700 rounded">
+    <h1 class="text-base font-normal mb-1">Hey, I'm Dens 👋</h1>
+    <p class="mb-1">AI & Backend Engineer • Rust | TypeScript | Python</p>
+    <h2 class="text-sm font-normal mb-1 mt-1">Contact</h2>
+    <p class="text-xs">
       dens.sumesh79@gmail.com • 480.938.0990 •
-      <a href="https://github.com/densumesh" class="external-link">github.com/densumesh</a>
+      <a href="https://github.com/densumesh" class="text-blue-400 hover:underline">github.com/densumesh</a>
     </p>
   </section>
 
   <!-- ABOUT -->
-  <section class="section">
-    <h2>About</h2>
-    <p>
+  <section class="mb-1 p-2 border border-zinc-700 rounded">
+    <h2 class="text-sm font-normal mb-1">About</h2>
+    <p class="text-xs">
       I'm a Founding Engineer at Trieve (YC W23) building distributed systems
       and search infra. Previously at the Interplanetary Initiative Lab, I
       worked on satellite communication systems. I am currently pursuing a
@@ -26,21 +26,21 @@ import Layout from '../layouts/Layout.astro';
   </section>
 
   <!-- RÉSUMÉ -->
-  <section class="section">
-    <h2>Résumé</h2>
+  <section class="mb-1 p-2 border border-zinc-700 rounded">
+    <h2 class="text-sm font-normal mb-1">Résumé</h2>
 
-    <div class="grid-two">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
       <!-- Column 1 -->
       <div>
-        <h3>Education</h3>
-        <p>
+        <h3 class="text-sm font-normal mb-1 mt-2">Education</h3>
+        <p class="mb-2 text-sm">
           <strong>B.S. Computer Science</strong><br />
           Arizona State University<br />
           GPA: 4.0
         </p>
 
-        <h3>Technical Skills</h3>
-        <ul>
+        <h3 class="text-sm font-normal mb-1 mt-2">Technical Skills</h3>
+        <ul class="list-disc list-inside space-y-0 mb-2 text-sm">
           <li>Rust, Kotlin, TypeScript, Python, Java, SQL, C, C++</li>
           <li>
             AWS (Lambda, API Gateway, DynamoDB, CDK), Kubernetes, Redis,
@@ -55,10 +55,10 @@ import Layout from '../layouts/Layout.astro';
 
       <!-- Column 2 -->
       <div>
-        <h3>Work Experience</h3>
-        <h4>Trieve (YC W23) — Founding Engineer / AI Engineer</h4>
-        <p><em>Jun 2023–Present | San Francisco, CA</em></p>
-        <ul>
+        <h3 class="text-sm font-normal mb-1 mt-2">Work Experience</h3>
+        <h4 class="font-normal mb-1 text-sm">Trieve (YC W23) — Founding Engineer / AI Engineer</h4>
+        <p class="italic mb-1 text-xs"><em>Jun 2023–Present | San Francisco, CA</em></p>
+        <ul class="list-disc list-inside space-y-0 mb-2 text-sm">
           <li>
             300 µs typo‑tolerance system via BK‑Trees + Redis (100× faster).
           </li>
@@ -72,9 +72,9 @@ import Layout from '../layouts/Layout.astro';
           </li>
         </ul>
 
-        <h4>Interplanetary Initiative Lab — Laboratory Aide</h4>
-        <p><em>Jan 2024–Oct 2024 | Tempe, AZ</em></p>
-        <ul>
+        <h4 class="font-normal mb-1 text-sm">Interplanetary Initiative Lab — Laboratory Aide</h4>
+        <p class="italic mb-1 text-xs"><em>Jan 2024–Oct 2024 | Tempe, AZ</em></p>
+        <ul class="list-disc list-inside space-y-0 text-sm">
           <li>Satellite radio protocols & ADCS commissioning software.</li>
           <li>Telemetry pipelines & solar‑panel alignment algorithms.</li>
         </ul>
@@ -83,23 +83,23 @@ import Layout from '../layouts/Layout.astro';
   </section>
 
   <!-- PROJECTS -->
-  <section class="section">
-    <h2>Projects</h2>
-    <ul>
+  <section class="mb-1 p-2 border border-zinc-700 rounded">
+    <h2 class="text-sm font-normal mb-1">Projects</h2>
+    <ul class="list-disc list-inside space-y-0 text-xs">
       <li>
         <strong>Broccoli</strong> — Distributed Rust message‑queue with Redis
         backing.
-        <a href="https://github.com/densumesh/broccoli" class="external-link">Repo</a>
+        <a href="https://github.com/densumesh/broccoli" class="text-blue-400 hover:underline">Repo</a>
       </li>
       <li>
         <strong>Actix Req/Reply Cache</strong> — A simple request/reply cache
         for Actix‑web backed by Redis.
-        <a href="https://github.com/densumesh/actix-request-reply-cache" class="external-link">Repo</a>
+        <a href="https://github.com/densumesh/actix-request-reply-cache" class="text-blue-400 hover:underline">Repo</a>
       </li>
       <li>
         <strong>Debate Evidence</strong> — Debate evidence search platform (30
         K+ users).
-        <a href="https://github.com/densumesh/debatev-frontend" class="external-link">Repo</a>
+        <a href="https://github.com/densumesh/debatev-frontend" class="text-blue-400 hover:underline">Repo</a>
       </li>
     </ul>
   </section>

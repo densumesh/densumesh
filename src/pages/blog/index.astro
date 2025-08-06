@@ -1,28 +1,28 @@
 ---
 import { getCollection } from 'astro:content';
-import Layout from '../layouts/Layout.astro';
+import Layout from '../../layouts/Layout.astro';
 
 const posts = await getCollection('blog');
 const sortedPosts = posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 ---
 
 <Layout title="Blog - Dens Sumesh">
-  <section class="section">
-    <h1>Blog</h1>
+  <section class="mb-6 p-4 border border-zinc-700 rounded">
+    <h1 class="text-xl font-normal mb-2">Blog</h1>
     <p>Thoughts on engineering, AI, and building distributed systems.</p>
   </section>
 
-  <section class="section">
+  <section class="mb-6 p-4 border border-zinc-700 rounded">
     {sortedPosts.length === 0 ? (
       <p>No blog posts yet. Check back soon!</p>
     ) : (
-      <ul class="blog-list">
+      <ul class="space-y-4">
         {sortedPosts.map((post) => (
-          <li>
-            <h3>
-              <a href={`/blog/${post.slug}`}>{post.data.title}</a>
+          <li class="p-4 border border-zinc-700 rounded">
+            <h3 class="text-lg font-normal mb-2">
+              <a href={`/blog/${post.slug}`} class="text-blue-400 hover:underline">{post.data.title}</a>
             </h3>
-            <div class="blog-meta">
+            <div class="text-zinc-500 text-sm mb-2">
               {post.data.pubDate.toLocaleDateString('en-US', {
                 year: 'numeric',
                 month: 'long',

@@ -16,9 +16,9 @@ const { Content } = await post.render();
 
 <Layout title={post.data.title}>
   <article>
-    <section class="section">
-      <h1>{post.data.title}</h1>
-      <div class="blog-meta">
+    <section class="mb-6 p-4 border border-zinc-700 rounded">
+      <h1 class="text-xl font-normal mb-2">{post.data.title}</h1>
+      <div class="text-zinc-500 text-sm mb-2">
         {post.data.pubDate.toLocaleDateString('en-US', {
           year: 'numeric',
           month: 'long',
@@ -28,15 +28,15 @@ const { Content } = await post.render();
           <span> • {post.data.tags.join(', ')}</span>
         )}
       </div>
-      <p><em>{post.data.description}</em></p>
+      <p class="italic"><em>{post.data.description}</em></p>
     </section>
 
-    <section class="section">
+    <section class="mb-6 p-4 border border-zinc-700 rounded prose">
       <Content />
     </section>
 
-    <section class="section">
-      <a href="/blog">← Back to blog</a>
+    <section class="mb-6 p-4 border border-zinc-700 rounded">
+      <a href="/blog" class="text-blue-400 hover:underline">← Back to blog</a>
     </section>
   </article>
 </Layout>

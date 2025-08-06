@@ -201,8 +201,8 @@ const { title, description } = Astro.props;
   
   <body>
     <nav>
-      <a href="/">home</a>
-      <a href="/blog">blog</a>
+      <a href="/" class={Astro.url.pathname === "/" ? "active" : ""}>home</a>
+      <a href="/blog" class={Astro.url.pathname.startsWith("/blog") ? "active" : ""}>blog</a>
       <a href="https://github.com/densumesh" class="external-link">github</a>
     </nav>
     

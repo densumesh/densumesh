@@ -1,0 +1,59 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: post,
+  }));
+}
+
+const post = Astro.props;
+const { Content } = await post.render();
+---
+
+<Layout title={post.data.title}>
+  <article>
+    <section class="section">
+      <h1>{post.data.title}</h1>
+      <div class="blog-meta">
+        {post.data.pubDate.toLocaleDateString('en-US', {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric'
+        })}
+        {post.data.tags.length > 0 && (
+          <span> • {post.data.tags.join(', ')}</span>
+        )}
+      </div>
+      <p><em>{post.data.description}</em></p>
+    </section>
+
+    <section class="section">
+      <Content />
+    </section>
+
+    <section class="section">
+      <a href="/blog">← Back to blog</a>
+    </section>
+  </article>
+</Layout>
+
+<style>
+  article {
+    max-width: 80ch;
+    margin: 0 auto;
+  }
+  
+  article .section {
+    border: none;
+    padding: var(--space-md) 0;
+  }
+  
+  article h1 {
+    font-size: 2rem;
+    margin-bottom: var(--space-sm);
+  }
+</style>

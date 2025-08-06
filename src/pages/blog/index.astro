@@ -1,0 +1,58 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+
+const posts = await getCollection('blog');
+const sortedPosts = posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+---
+
+<Layout title="Blog - Dens Sumesh">
+  <section class="section">
+    <h1>Blog</h1>
+    <p>Thoughts on engineering, AI, and building distributed systems.</p>
+  </section>
+
+  <section class="section">
+    {sortedPosts.length === 0 ? (
+      <p>No blog posts yet. Check back soon!</p>
+    ) : (
+      <ul class="blog-list">
+        {sortedPosts.map((post) => (
+          <li>
+            <h3>
+              <a href={`/blog/${post.slug}`}>{post.data.title}</a>
+            </h3>
+            <div class="blog-meta">
+              {post.data.pubDate.toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+              })}
+              {post.data.tags.length > 0 && (
+                <span> • {post.data.tags.join(', ')}</span>
+              )}
+            </div>
+            <p>{post.data.description}</p>
+          </li>
+        ))}
+      </ul>
+    )}
+  </section>
+
+  <!-- External Blog Posts -->
+  <section class="section">
+    <h2>External Posts</h2>
+    <ul>
+      <li>
+        <a href="https://trieve.ai/accurate-hallucination-detection-with-ner" class="external-link">
+          Accurate Hallucination Detection with NER
+        </a>
+      </li>
+      <li>
+        <a href="https://trieve.ai/building-blazingly-fast-typo-correction-in-rust" class="external-link">
+          Building Blazingly Fast Typo Correction in Rust
+        </a>
+      </li>
+    </ul>
+  </section>
+</Layout>

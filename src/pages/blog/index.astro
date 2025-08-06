@@ -8,7 +8,15 @@ const sortedPosts = posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDa
 
 <Layout title="Blog - Dens Sumesh">
   <section class="p-2 rounded">
-    <h1 class="text-xl font-normal mb-2">Blog</h1>
+    <div class="flex justify-between items-center mb-2">
+      <h1 class="text-xl font-normal">Blog</h1>
+      <a href="/rss.xml" class="text-blue-400 hover:underline text-sm flex items-center gap-1" title="RSS Feed">
+        <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+          <path d="M6.503 20.752c0 1.794-1.456 3.248-3.251 3.248S0 22.546 0 20.752s1.456-3.248 3.252-3.248 3.251 1.454 3.251 3.248zm-6.503-12.572v4.811c6.05.062 10.96 4.966 11.022 11.009h4.817c-.062-8.71-7.118-15.758-15.839-15.82zm0-3.368c10.58.046 19.152 8.594 19.183 19.188h4.817c-.03-13.231-10.755-23.954-24-24v4.812z"/>
+        </svg>
+        RSS
+      </a>
+    </div>
     <p>Thoughts on engineering, AI, and building distributed systems.</p>
   </section>
 

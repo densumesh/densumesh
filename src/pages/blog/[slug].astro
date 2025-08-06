@@ -16,7 +16,7 @@ const { Content } = await post.render();
 
 <Layout title={post.data.title}>
   <article>
-    <section class="mb-6 p-4 border border-zinc-700 rounded">
+    <section class="p-2 rounded">
       <h1 class="text-xl font-normal mb-2">{post.data.title}</h1>
       <div class="text-zinc-500 text-sm mb-2">
         {post.data.pubDate.toLocaleDateString('en-US', {
@@ -31,11 +31,13 @@ const { Content } = await post.render();
       <p class="italic"><em>{post.data.description}</em></p>
     </section>
 
-    <section class="mb-6 p-4 border border-zinc-700 rounded prose">
+      <hr class="border-zinc-700 my-4">
+
+    <section class="p-2 rounded prose">
       <Content />
     </section>
 
-    <section class="mb-6 p-4 border border-zinc-700 rounded">
+    <section class="p-2 rounded">
       <a href="/blog" class="text-blue-400 hover:underline">← Back to blog</a>
     </section>
   </article>

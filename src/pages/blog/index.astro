@@ -20,13 +20,15 @@ const sortedPosts = posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDa
     <p>Thoughts on engineering, AI, and building distributed systems.</p>
   </section>
 
+  <hr class="border-zinc-700 my-4 sm:hidden">
+  
   <section class="p-2 rounded">
     {sortedPosts.length === 0 ? (
       <p>No blog posts yet. Check back soon!</p>
     ) : (
       <ul class="space-y-1">
         {sortedPosts.map((post) => (
-          <li>
+          <li class="sm:mb-0 mb-2">
             <h3 class="text-lg font-normal">
               <a href={`/blog/${post.slug}`} class="text-blue-400 hover:underline">{post.data.title}</a>
             </h3>

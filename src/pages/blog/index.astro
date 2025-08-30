@@ -22,11 +22,11 @@ const sortedPosts = posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDa
 
   <hr class="border-zinc-700 my-4 sm:hidden">
 
-  <section class="p-2 rounded">
+  <section class="p-2 rounded ml-7">
     {sortedPosts.length === 0 ? (
       <p>No blog posts yet. Check back soon!</p>
     ) : (
-      <ul class="space-y-1">
+      <ul class="space-y-1 list-decimal">
         {sortedPosts.map((post) => (
           <li class="mb-2">
             <h3 class="text-lg font-normal">

@@ -23,7 +23,7 @@
 }
 
 .prose p {
-  @apply mb-4;
+  @apply mb-4 text-base;
 }
 
 .prose ul {
@@ -31,7 +31,7 @@
 }
 
 .prose ol {
-  @apply list-decimal list-inside space-y-1 mb-4;
+  @apply list-decimal list-inside space-y-1 mb-4 text-base;
 }
 
 .prose code {

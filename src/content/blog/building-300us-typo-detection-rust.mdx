@@ -3,6 +3,7 @@ title: "How we Built 300μs Typo Detection for 1.3M Words in Rust"
 description: "We explain how we built blazingly fast spellcheck in Rust using BKTrees, Redis queues, and Clickhouse in this blog."
 pubDate: 2024-09-09
 tags: ["rust", "performance", "algorithms", "BKTree", "typo-correction", "distributed-systems"]
+heroImage: "https://cdn.trieve.ai/blog/building-30%CE%BCs-typo-tolerance-for-1.3M-words%20using%20Rust/typo-tolerance-demo.gif"
 ---
 
 We launched our ~[Hacker News search and RAG engine](https://hn.trieve.ai)~ (we have since taken it down) with a half-baked typo correction system. Our first draft took 30+ms for correctly spelled queries which was slow enough that we defaulted it to off. Our latest version is 100 times faster, 300μs for correctly spelled queries and ~5ms/word for misspellings. We explain how it was accomplished in this post!

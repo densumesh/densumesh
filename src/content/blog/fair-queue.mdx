@@ -1,25 +1,43 @@
 ---
 title: "Your Biggest Customer Might Be Your Biggest Bottleneck"
-description: "How one noisy customer almost broke our product and why we built Broccoli to make queues fair for everyone"
+description: "How one customer almost broke our product and why we built Broccoli to make queues fair for everyone"
 pubDate: 2025-08-29
-tags: ["rust", "performance", "distributed-systems", "queueing", "Broccoli"]
+tags: ["rust", "performance", "distributed-systems", "queueing", "broccoli"]
+heroImage: "https://cdn.densumesh.dev/broccoli-queue-blog-hero.png"
 ---
 
-It was a late night at the Trieve office. The team was tired from a long day of shipping and ready to head home. Then our phones lit up. Customers were complaining all over our Slack and Discord about their documents failing to be indexed for multiple hours. It looked like a bomb had gone off in our system.
+import BlogImage from '../../components/BlogImage.tsx';
 
-Our biggest customer had just dumped millions of documents into the ingestion pipeline, and suddenly other customers couldn't get their data indexed. Throwing more workers at the problem wasn’t helping. They were all busy chewing through this one massive job while everyone else’s data sat waiting in line.
+<BlogImage
+    src="https://cdn.densumesh.dev/broccoli-queue-blog-hero.png"
+    alt="Broccoli queueing illustration"
+    className='max-h-[600px] my-4'
+    caption='An illustration of the how messages get bottlenecked.'
+    client:load
+/>
+
+
+It was a late night at the Trieve office, and we had just onboarded our largest customer to date onto the platform. That's when our phones started lighting up with complaints flooding our Slack and Discord channels. Customers were reporting that their documents had been failing to index for hours.
+
+The culprit was our newest customer, who was dumping millions of documents into our service and had completely clogged our ingestion pipeline. We tried throwing more workers at the problem, but it didn't help. They were all tied up processing this massive job while everyone else's data sat in an endless queue.
+
+We needed a better way to manage our queues and ensure that all customers were treated fairly.
 
 # The Anatomy of a Noisy Neighbor
 
-
-What we were seeing had a name: the “noisy neighbor” problem. Basically, in multi-tenant distributed systems, one greedy tenant can starve out the rest.
+What we were seeing had a name: the “noisy neighbor” problem. In multi-tenant systems, one greedy tenant can starve out the rest.
 
 Imagine you’re Cursor, indexing millions of codebases. Each repo is broken down into thousands of files, and each file needs to get pushed through an ingestion pipeline—tokenized, vectorized, chunked, and embedded.
 
-Now, imagine a new customer signs up with a massive monorepo containing tens of millions of files. The moment their job hits the pipeline, you can only watch in horror as your other customers' indexing requests grind to a halt. For the next several hours, your system is held hostage by a single tenant.
+Then, a new customer signs up with a massive monorepo containing tens of millions of files. The moment their job hits the pipeline, you can only watch in horror as your other customers' indexing requests grind to a halt. For the next several hours, your system is held hostage by a single tenant.
 
-![image](https://cdn.densumesh.dev/fifo-queue.png)  
-> In a traditional FIFO queue, smaller jobs are stuck waiting behind one massive job.
+<BlogImage
+    src="https://cdn.densumesh.dev/fifo-queue.png"
+    alt="FIFO queue illustration"
+    className="w-[700px] my-4"
+    caption="In a traditional FIFO queue, smaller jobs are stuck waiting behind one massive job."
+    client:load
+/>
 
 This is a fundamental flaw in systems built on a traditional First-In, First-Out (FIFO) messaging queue. FIFO only cares about who got there first, not who needs serving most.
 
@@ -27,13 +45,13 @@ This is a fundamental flaw in systems built on a traditional First-In, First-Out
 
 When you're dealing with noisy neighbors, there are a few common solutions that come to mind.
 
-## 1. Throttling Clients
+## A. Throttling Clients
 
 The first instinct is to just limit how fast customers can send messages. But this approach basically says "your burst traffic is now your problem to solve."
 
 Customers end up having to build complex retry logic, implement their own queuing, and deal with the operational headaches that come with managing backpressure. Meanwhile, you're stuck building sophisticated global rate-limiting systems that add complexity to your infrastructure.
 
-## 2. Dedicated Worker Queues
+## B. Dedicated Worker Queues
 
 The next idea sounds reasonable: give big customers their own dedicated resources. We actually tried this at Trieve, spinning up separate worker fleets for our largest clients.
 
@@ -49,8 +67,13 @@ Traditional queues are like having one massive line at the DMV. Everyone gets se
 
 Fair queueing is different. It's like having separate lines for each customer, but with a receptionist who calls one person from each line in rotation.
 
-![image](https://cdn.densumesh.dev/fair-queue.png)  
-> Fair queueing ensures every customer gets a turn, preventing starvation.
+<BlogImage
+    src="https://cdn.densumesh.dev/fair-queue.png"
+    alt="Fair queue illustration"
+    className="w-[700px] my-4"
+    caption="Fair queueing ensures every customer gets a turn, preventing starvation."
+    client:load
+/>
 
 Busy customers stay busy, but they can't starve quiet customers. If Customer A has 1,000 messages and Customer B has 1, Customer B doesn’t have to wait for all 1,000 of Customer A’s messages to clear. The system simply alternates between them: A, B, A, A, A... Everyone makes progress.
 
@@ -60,7 +83,14 @@ I built [Broccoli](https://github.com/densumesh/broccoli) to make this concept a
 
 Here's how the fair queuing is implemented:
 
-![image](https://cdn.densumesh.dev/fairness-algo.png)
+
+<BlogImage
+    src="https://cdn.densumesh.dev/fairness-algo.png"
+    alt="Fairness algorithm illustration"
+    className="w-[700px] my-4"
+    caption="Pseudo code for fairness algorithm"
+    client:load
+/>
 
 ## When a message arrives (Insert operation):
 1. We store the message in a queue that's dedicated to that specific client  
@@ -91,4 +121,4 @@ When I first open-sourced Broccoli, I had no expectations about whether people w
 
 Big shoutout to [danigiri](https://github.com/danigiri) for adding support for SurrealDB as a broker and making the project more flexible for everyone.
 
-If you want to dig in deeper or try it out for yourself, check out [Broccoli on GitHub](https://github.com/densumesh/broccoli).
+If you want to dig in deeper or try it out for yourself, check out [Broccoli on GitHub](https://github.com/densumesh/broccoli), or if you just want to chat about queues or distributed systems in general, feel free to reach out to me on Twitter [@densumesh](https://twitter.com/densumesh).

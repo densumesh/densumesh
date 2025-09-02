@@ -22,27 +22,34 @@ const sortedPosts = posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDa
 
   <hr class="border-zinc-700 my-4 sm:hidden">
 
-  <section class="p-2 rounded ml-7">
+  <section class="p-2 rounded">
     {sortedPosts.length === 0 ? (
       <p>No blog posts yet. Check back soon!</p>
     ) : (
-      <ul class="space-y-1 list-decimal">
+      <ul class="grid grid-cols-1 gap-4 sm:gap-6">
         {sortedPosts.map((post) => (
-          <li class="mb-2">
-            <h3 class="text-lg font-normal">
-              <a href={`/blog/${post.slug}`} class="text-blue-400 hover:underline">{post.data.title}</a>
-            </h3>
-            <div class="text-zinc-500 text-sm mb-2">
-              {post.data.pubDate.toLocaleDateString('en-US', {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric'
-              })}
-              {post.data.tags.length > 0 && (
-                <span> • {post.data.tags.join(', ')}</span>
-              )}
-            </div>
-            <p>{post.data.description}</p>
+          <li>
+            <a
+              href={`/blog/${post.slug}`}
+              class="block p-4 border border-zinc-700 rounded bg-zinc-900 transition-shadow hover:shadow-lg hover:border-blue-400 focus:border-blue-400 group outline-none"
+              tabindex="0"
+            >
+              <h3 class="text-lg font-normal mb-1 text-blue-400 group-hover:text-blue-300 group-focus:text-blue-300 transition-colors">
+                {post.data.title}
+              </h3>
+              <div class="flex items-center text-zinc-500 text-xs mb-2 gap-2">
+                <svg class="w-4 h-4 inline-block mr-1 opacity-70" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2z"/></svg>
+                {post.data.pubDate.toLocaleDateString('en-US', {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric'
+                })}
+                {post.data.tags.length > 0 && (
+                  <span class="ml-2">• {post.data.tags.join(', ')}</span>
+                )}
+              </div>
+              <p class="text-zinc-300 text-sm leading-relaxed">{post.data.description}</p>
+            </a>
           </li>
         ))}
       </ul>

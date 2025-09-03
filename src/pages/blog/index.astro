@@ -26,29 +26,49 @@ const sortedPosts = posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDa
     {sortedPosts.length === 0 ? (
       <p>No blog posts yet. Check back soon!</p>
     ) : (
-      <ul class="grid grid-cols-1 gap-4 sm:gap-6">
+  <ul class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
         {sortedPosts.map((post) => (
-          <li>
+          <li class="h-full">
             <a
               href={`/blog/${post.slug}`}
-              class="block p-4 border border-zinc-700 rounded bg-zinc-900 transition-shadow hover:shadow-lg hover:border-blue-400 focus:border-blue-400 group outline-none"
+              class="flex flex-col h-full border border-zinc-700 rounded bg-zinc-900 transition-shadow hover:shadow-lg hover:border-blue-400 focus:border-blue-400 group outline-none overflow-hidden p-0"
               tabindex="0"
             >
-              <h3 class="text-lg font-normal mb-1 text-blue-400 group-hover:text-blue-300 group-focus:text-blue-300 transition-colors">
-                {post.data.title}
-              </h3>
-              <div class="flex items-center text-zinc-500 text-xs mb-2 gap-2">
-                <svg class="w-4 h-4 inline-block mr-1 opacity-70" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2z"/></svg>
-                {post.data.pubDate.toLocaleDateString('en-US', {
-                  year: 'numeric',
-                  month: 'long',
-                  day: 'numeric'
-                })}
-                {post.data.tags.length > 0 && (
-                  <span class="ml-2">• {post.data.tags.join(', ')}</span>
-                )}
+              {post.data.heroImage && (
+                <div class="p-4 pb-0">
+                  <img
+                    src={post.data.heroImage}
+                    alt={post.data.title + ' hero image'}
+                    class="w-full h-64 object-contain rounded border border-zinc-700 bg-zinc-800 shadow-sm mx-auto"
+                    style={{ minHeight: '15rem', maxHeight: '15rem' }}
+                    loading="lazy"
+                  />
+                </div>
+              )}
+              <div class="p-4 flex flex-col flex-1">
+                <h3 class="text-lg font-normal mb-1 text-blue-400 group-hover:text-blue-300 group-focus:text-blue-300 transition-colors">
+                  {post.data.title}
+                </h3>
+                <div class="mb-2">
+                  <div class="flex items-center gap-1 text-zinc-400 text-xs mb-2">
+                    <svg class="w-4 h-4 opacity-70" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2z"/></svg>
+                    <span>{post.data.pubDate.toLocaleDateString('en-US', {
+                      year: 'numeric',
+                      month: 'short',
+                      day: 'numeric'
+                    })}</span>
+                  </div>
+                  {post.data.tags.length > 0 && (
+                    <div class="flex flex-wrap gap-1">
+                      {post.data.tags.map(tag => (
+                        <span class="bg-zinc-800 border border-zinc-700 rounded-full px-2 py-0.5 text-zinc-300 font-mono text-[0.85em]">{tag}</span>
+                      ))}
+                    </div>
+                  )}
+                </div>
+                <p class="text-zinc-300 text-sm leading-relaxed">{post.data.description}</p>
+                <span class="flex-1" />
               </div>
-              <p class="text-zinc-300 text-sm leading-relaxed">{post.data.description}</p>
             </a>
           </li>
         ))}

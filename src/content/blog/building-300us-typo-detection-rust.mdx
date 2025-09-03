@@ -1,14 +1,22 @@
 ---
-title: "How we Built 300μs Typo Detection for 1.3M Words in Rust"
+title: "How We Built 300μs Typo Detection for 1.3M Words in Rust"
 description: "We explain how we built blazingly fast spellcheck in Rust using BKTrees, Redis queues, and Clickhouse in this blog."
 pubDate: 2024-09-09
 tags: ["rust", "performance", "algorithms", "BKTree", "typo-correction", "distributed-systems"]
 heroImage: "https://cdn.trieve.ai/blog/building-30%CE%BCs-typo-tolerance-for-1.3M-words%20using%20Rust/typo-tolerance-demo.gif"
 ---
 
-We launched our ~[Hacker News search and RAG engine](https://hn.trieve.ai)~ (we have since taken it down) with a half-baked typo correction system. Our first draft took 30+ms for correctly spelled queries which was slow enough that we defaulted it to off. Our latest version is 100 times faster, 300μs for correctly spelled queries and ~5ms/word for misspellings. We explain how it was accomplished in this post!
+import BlogImage from '../../components/BlogImage.tsx';
 
-![video demo of spellcheck](https://cdn.trieve.ai/blog/building-30%CE%BCs-typo-tolerance-for-1.3M-words%20using%20Rust/typo-tolerance-demo.gif)
+<BlogImage
+    src="https://cdn.trieve.ai/blog/building-30%CE%BCs-typo-tolerance-for-1.3M-words%20using%20Rust/typo-tolerance-demo.gif"
+    alt="video demo of spellcheck"
+    className='max-h-[600px] my-4'
+    caption='Demo of typo tolerance in action on our Hacker News search demo.'
+    client:load
+/>
+
+We launched our ~[Hacker News search and RAG engine](https://hn.trieve.ai)~ (we have since taken it down) with a half-baked typo correction system. Our first draft took 30+ms for correctly spelled queries which was slow enough that we defaulted it to off. Our latest version is 100 times faster, 300μs for correctly spelled queries and ~5ms/word for misspellings. We explain how it was accomplished in this post!
 
 # Creating a dictionary of Words and Frequencies
 
@@ -198,7 +206,13 @@ fn is_best_correction(word: &str, correction: &str) -> bool {
 
 [Levitating commented on HN](https://news.ycombinator.com/item?id=41396655) that a query for `FreeBSD` sorted by points returned irrelevant results. Our tokenizer splits on camel case so `FreeBSD` got turned into `Free BSD FreeBSD` and stories only containing the word "Free" had more points than anything containing "FreeBSD" and thus ranked higher. Being able to effectively check for full words on a dataset-level allowed us to automatically require non-English words such that a query for `FreeBSD` turned into `"FreeBSD"`.
 
-![auto required word demo](https://cdn.trieve.ai/blog/building-30%CE%BCs-typo-tolerance-for-1.3M-words%20using%20Rust/auto-required-word-demo.gif)
+<BlogImage
+    src="https://cdn.trieve.ai/blog/building-30%CE%BCs-typo-tolerance-for-1.3M-words%20using%20Rust/auto-required-word-demo.gif"
+    alt="auto required word demo"
+    className='max-h-[600px] my-4'
+    caption='Demo of auto-requiring non-English words like FreeBSD.'
+    client:load
+/>
 
 # Future Ideas
 

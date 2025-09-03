@@ -1,6 +1,6 @@
 ---
 title: "Your Biggest Customer Might Be Your Biggest Bottleneck"
-description: "How one customer almost broke our product and why we built Broccoli to make queues fair for everyone"
+description: "Simple FIFO queues are not viable for multi-tenant systems. I explain why fair queuing is a must and how I built Broccoli to address this issue."
 pubDate: 2025-08-29
 tags: ["rust", "performance", "distributed-systems", "queueing", "broccoli"]
 heroImage: "https://cdn.densumesh.dev/broccoli-queue-blog-hero.png"
@@ -12,7 +12,7 @@ import BlogImage from '../../components/BlogImage.tsx';
     src="https://cdn.densumesh.dev/broccoli-queue-blog-hero.png"
     alt="Broccoli queueing illustration"
     className='max-h-[600px] my-4'
-    caption='An illustration of the how messages get bottlenecked.'
+    caption='An illustration of messages being bottlenecked.'
     client:load
 />
 

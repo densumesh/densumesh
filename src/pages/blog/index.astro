@@ -26,7 +26,7 @@ const sortedPosts = posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDa
     {sortedPosts.length === 0 ? (
       <p>No blog posts yet. Check back soon!</p>
     ) : (
-  <ul class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+  <ul class="grid grid-cols-1 gap-4 ">
         {sortedPosts.map((post) => (
           <li class="h-full">
             <a
@@ -34,17 +34,6 @@ const sortedPosts = posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDa
               class="flex flex-col h-full border border-zinc-700 rounded bg-zinc-900 transition-shadow hover:shadow-lg hover:border-blue-400 focus:border-blue-400 group outline-none overflow-hidden p-0"
               tabindex="0"
             >
-              {post.data.heroImage && (
-                <div class="p-4 pb-0">
-                  <img
-                    src={post.data.heroImage}
-                    alt={post.data.title + ' hero image'}
-                    class="w-full h-64 object-contain rounded border border-zinc-700 bg-zinc-800 shadow-sm mx-auto"
-                    style={{ minHeight: '15rem', maxHeight: '15rem' }}
-                    loading="lazy"
-                  />
-                </div>
-              )}
               <div class="p-4 flex flex-col flex-1">
                 <h3 class="text-lg font-normal mb-1 text-blue-400 group-hover:text-blue-300 group-focus:text-blue-300 transition-colors">
                   {post.data.title}

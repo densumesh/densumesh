@@ -2,7 +2,7 @@
 
 I'm a software engineer passionate about building high-performance systems and AI applications. I am currently working as a Backend Engineer at **Mintlify** where I rearchitect systems to handle scale and build out new features.
 
-As the **first engineering hire** at [Trieve (YC W23)](https://www.trieve.ai), I designed and scaled a distributed search platform that handles millions of queries in under 100 ms. Before that, I contributed to deep-space satellite-communication research in ASU's [Interplanetary Initiative Lab](https://interplanetary.asu.edu/).
+As the **first engineering hire** at [Trieve (YC W23)](https://www.trieve.ai), I designed and scaled a distributed search platform that handles millions of queries in under 100 ms. Before that, I contributed to deep-space satellite-communication research in ASU's [Interplanetary Initiative Lab](https://interplanetary.asu.edu/). I also worked at [Amazon](https://www.amazon.com/) for a brief stint working on IP and Copyright protection and automated takedowns as a part of Brand Registry.
 
 ## Featured Projects
 

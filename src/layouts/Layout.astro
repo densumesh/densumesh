@@ -4,9 +4,11 @@ import '../styles/global.css';
 export interface Props {
   title: string;
   description?: string;
+  image?: string;
 }
 
-const { title, description } = Astro.props;
+const { title, description, image } = Astro.props;
+const ogImage = new URL(image ?? '/og-image.png', 'https://densumesh.dev').href;
 ---
 
 <!DOCTYPE html>
@@ -36,13 +38,13 @@ const { title, description } = Astro.props;
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description || "Dens Sumesh - Software Engineer"} />
     <meta property="og:url" content="https://densumesh.dev" />
-    <meta property="og:image" content="https://densumesh.dev/og-image.png" />
+    <meta property="og:image" content={ogImage} />
     
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description || "Dens Sumesh - Software Engineer"} />
-    <meta name="twitter:image" content="https://densumesh.dev/og-image.png" />
+    <meta name="twitter:image" content={ogImage} />
     
     <!-- Google tag (gtag.js) -->
     <script defer data-domain="densumesh.dev" src="https://plausible.trieve.ai/js/script.js"></script>

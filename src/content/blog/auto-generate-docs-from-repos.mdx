@@ -1,0 +1,96 @@
+---
+title: "Auto-generating documentation sites from GitHub repos"
+description: "How we built a multi-agent system to generate production-ready documentation sites from any public GitHub repository."
+pubDate: 2026-03-02
+tags: ["AI", "agents", "documentation", "developer-tools"]
+heroImage: "https://www.mintlify.com/images/featured/auto-generate-docs.webp"
+---
+
+import BlogImage from '../../components/BlogImage.tsx';
+
+<BlogImage
+    src="https://www.mintlify.com/images/featured/auto-generate-docs.webp"
+    alt="Auto-generating documentation sites from GitHub repos"
+    className='max-h-[600px] my-4'
+    client:load
+/>
+
+I originally built [Broccoli](https://github.com/densumesh/broccoli), a fair queueing library for Rust, to solve a specific infrastructure challenge I encountered at work. After I open-sourced the project and [wrote about the architecture](https://densumesh.dev/blog/fair-queue/), it quickly gained traction, growing to over 600 stars on GitHub.
+
+But like countless other open-source maintainers, I hit a wall: my code was solid and my README was good, but I didn't have the time to write long-form tutorials, quickstarts, and guides. The desire to help my users was there, but the bandwidth to architect a documentation site was not.
+
+At Mintlify, we built [a tool](https://www.mintlify.com/explore) for exactly this situation.
+
+By simply replacing `github.com` with `mintlify.com` in any public repo URL, you can generate a structured, branded documentation site. Here's what it generated for [Broccoli](https://densumesh-broccoli-27.mintlifytest.com).
+
+Instead of starting from scratch, I can clone this generated output directly into my Mintlify account, tweak it, and publish it. It's not a replacement for human editing, but it gives maintainers a massive head start, turning a multi-week chore into a few minutes of review.
+
+Here's a look under the hood at how we built this.
+
+## The pipeline
+
+Our pipeline runs entirely on sandboxed AI agents. We queue jobs through [Bull](https://github.com/OptimalBits/bull) on Redis, provision ephemeral sandboxes with [Daytona](https://www.daytona.io/), and power the generation using Claude Sonnet 4.6.
+
+### Locking down the sandbox
+
+First, both the source repository and the destination docs repository are cloned into an isolated environment where the agent gets full filesystem and bash access.
+
+Because we give the agent bash access, the network becomes a critical surface to control. We run a [mitmproxy](https://www.mitmproxy.org/) instance as a separate user inside the container, using `iptables` to transparently redirect all traffic through it. The proxy enforces a strict allowlist — anything not on it gets a `403`. Direct IP access is blocked so the agent can't sidestep DNS, and raw TCP egress is blocked entirely.
+
+GitHub writes are locked down even further. The agent is strictly limited to pushing to its designated docs branch, and the only GraphQL mutations it is authorized to execute are `createPullRequest` and `updatePullRequest`.
+
+To safeguard credentials, the agent's environment only contains placeholder tokens. When a request leaves the container, the proxy swaps those placeholders with real values at the transport layer.
+
+### Understanding the project
+
+Generic AI documentation usually reads poorly because the generator starts writing before it actually understands what it's writing about.
+
+Before generating a single page, the Mintlify agent scrapes the repo's `README` and GitHub metadata, finds its homepage, and uses heuristics to extract brand assets. Those assets automatically populate the [`docs.json`](https://mintlify.com/docs/organize/settings) fields that style every Mintlify site: `name`, `theme`, `colors.primary`, `colors.light`, `colors.dark`, `favicon`, and a core navigation object.
+
+### Plan first, write second
+
+We initially tried generating pages on the fly, but the results were messy. We ended up with redundant sections, confusing navigation, and pages that openly contradicted each other.
+
+In hindsight, the fix was obvious: generating a documentation site without a structural plan is like hiring writers for each chapter of a book without telling them what the other chapters cover. Each part might be fine in a vacuum, but they won't add up to a coherent whole.
+
+Now, before writing any pages, the agent browses the source code — reading exports, entry points, and command definitions to infer what the project actually does. The agent then produces a JSON file defining the project summary, brand info, and full navigation architecture.
+
+```json
+{
+  "projectType": "react-component-library",
+  "projectName": "Excalidraw",
+  "projectDescription": "Open source virtual hand-drawn style whiteboard",
+  "primaryColor": "#6965db",
+  "navigation": {
+    "tabs": [
+      {
+        "tab": "Documentation",
+        "groups": [
+          { "group": "Get Started", "pages": ["introduction", "installation"] },
+          { "group": "Core Concepts", "pages": ["elements", "app-state"] }
+        ]
+      }
+    ]
+  },
+  "keyFeatures": ["infinite-canvas", "real-time-collaboration"],
+  "publicApiSurface": ["Excalidraw", "MainMenu", "Sidebar"]
+}
+```
+
+Because pre-analysis, generation, and review all run in the same session, generation subagents are instructed to read this JSON map first. Every section is written with total awareness of the broader context.
+
+### Generate, validate, ship
+
+With the structure locked in, the orchestrator spins up subagents to write sections in parallel, grouping them one per navigation tab. For a large repository like [Excalidraw](https://excalidraw-excalidraw.mintlify.app/introduction), this cuts generation time from roughly 70 minutes down to 45.
+
+When the subagents finish, the orchestrator reconciles their outputs and resolves cross-references. If one section references an API documented in another, those links are automatically verified and wired up correctly.
+
+Finally, the agent uses the Mintlify CLI to validate the build and check for broken links, executing a final review sweep across both repositories to catch any remaining gaps or redundancies.
+
+## Try it
+
+As for me, I've finally got a massive head start on Broccoli's documentation. I can edit this generated output, fill in any highly-specific gaps, and publish it using a workflow I'm already familiar with. I finally have a structure to build on instead of a daunting blank page.
+
+Take any public open-source project you care about. Replace `github.com` with `mintlify.com` in the URL, and get a docs site that's ready to ship.
+
+See some of the documentation sites that have been generated and [try it yourself](https://www.mintlify.com/explore).

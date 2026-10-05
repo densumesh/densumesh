@@ -1,8 +1,3 @@
----
-import Layout from '../layouts/Layout.astro';
-import { getCollection } from 'astro:content';
-
-// Get blog posts and sort by date
 const posts = await getCollection('blog');
 const sortedPosts = posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 const latestPosts = sortedPosts.slice(0, 3); // Show latest 3 posts
@@ -28,11 +23,11 @@ const latestPosts = sortedPosts.slice(0, 3); // Show latest 3 posts
       where I designed and scaled a distributed search platform that handles millions of queries in under&nbsp;100 ms.
     </p>
     <p class="text-sm mb-2">
-      Before that, I was a SDE at Amazon, building large-scale backend services for vending brands and IP asset management.
+      Then Staff Engineer at <a href="https://www.mintlify.com" class="text-blue-400 hover:underline">Mintlify</a>, where I led agentic products and rearchitected systems to handle scale.
     </p>
 
     <p class="text-sm mb-2">
-      Currently, I'm a Senior Backend Engineer at <a href="https://www.mintlify.com" class="text-blue-400 hover:underline">Mintlify</a>, working on AI infrastructure and scaling.
+      Currently, I'm a Staff LLM Inference Engineer at <a href="https://www.d-matrix.ai/" class="text-blue-400 hover:underline">d-Matrix</a>, working on AI inference accelerators.
     </p>
 
     <p class="text-sm">

@@ -1,16 +1,22 @@
 # Hey, I'm Dens 👋
 
-I'm a software engineer passionate about building high-performance systems and AI applications. I am currently working as a Backend Engineer at **Mintlify** where I rearchitect systems to handle scale and build out new features.
 
-As the **first engineering hire** at [Trieve (YC W23)](https://www.trieve.ai), I designed and scaled a distributed search platform that handles millions of queries in under 100 ms. Before that, I contributed to deep-space satellite-communication research in ASU's [Interplanetary Initiative Lab](https://interplanetary.asu.edu/). I also worked at [Amazon](https://www.amazon.com/) for a brief stint working on IP and Copyright protection and automated takedowns as a part of Brand Registry.
+I'm a software engineer passionate about building high-performance systems and AI applications. I'm currently a Staff LLM Inference Engineer at **d-Matrix**, working on AI inference accelerators. Before that, I was a Staff Engineer at **Mintlify**, where I led agentic products and rearchitected systems to handle scale.
+
+
+As the **first engineering hire** at [Trieve (YC W23)](https://www.trieve.ai), I designed and scaled a distributed search platform that handles millions of queries in under 100 ms. Before that, I contributed to deep-space satellite-communication research in ASU's [Interplanetary Initiative Lab](https://interplanetary.asu.edu/).
+
 
 ## Featured Projects
+
 
 - **[Trieve](https://github.com/devflowinc/trieve)** — Low latency search engine for AI applications
 - **[Broccoli](https://github.com/densumesh/broccoli)** — Distributed Rust message-queue with Redis backing
 - **[Actix Req/Reply Cache](https://github.com/densumesh/actix-request-reply-cache)** — Request/reply cache for Actix-web backed by Redis
 - **[Debate Evidence](https://github.com/densumesh/debatev-frontend)** — Debate evidence search platform (30K+ users)
 
+
 ---
+
 
 **Contact**: [dens.sumesh79@gmail.com](mailto:dens.sumesh79@gmail.com) | **Website**: [densumesh.dev](https://densumesh.dev) | **X**: [@densumesh](https://x.com/densumesh)

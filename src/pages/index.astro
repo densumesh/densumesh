@@ -1,3 +1,7 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+
 const posts = await getCollection('blog');
 const sortedPosts = posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 const latestPosts = sortedPosts.slice(0, 3); // Show latest 3 posts
@@ -31,7 +35,7 @@ const latestPosts = sortedPosts.slice(0, 3); // Show latest 3 posts
     </p>
 
     <p class="text-sm">
-      When I’m not coding, I'm logging flight hours toward my private pilot’s license or tinkering with my many unfinished electrical engineering projects.
+      When I'm not coding, I'm logging flight hours toward my private pilot's license or tinkering with my many unfinished electrical engineering projects.
     </p>
   </section>
 
